@@ -1,0 +1,38 @@
+name: Validate Tests on Electron
+
+on:
+  workflow_dispatch:
+    inputs:
+      specPath:
+        description: Spec files that can run.
+        required: true
+        type: choice
+        default: "cypress/e2e/scenarios/hostname/validate/validate.feature"
+        options:
+          - cypress/e2e/scenarios/hostname/validate/validate.feature
+      user:
+        description: Username
+        required: true
+        type: string
+      pass:
+        description: Password
+        required: true
+        type: string
+
+jobs:
+  cypress-run:
+    name: Validate Tests on Electron
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        continue-on-error: true
+        with:
+          headed: false
+          spec: ${{inputs.specPath}}
+        env:
+          CYPRESS_USER: ${{inputs.user}}
+          CYPRESS_PASS: ${{inputs.pass}}

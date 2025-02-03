@@ -1,0 +1,39 @@
+{
+  "name": "revahost",
+  "version": "1.0.0",
+  "description": "Renew and Validate Hostname",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install",
+    "cypress": "nodemon -e js,jsx,ts,tsx,css,scss --exec cypress run",
+    "test": "npx cypress open --config-file cypress.config.js",
+    "hostname": "npx cypress open",
+    "renew": "npx cypress open --env tags=\"@renew\"",
+    "renewCLI": "npx cypress run --env tags=\"@renew\"",
+    "validate": "npx cypress open --env tags=\"@validate\"",
+    "validateCLI": "npx cypress run --env tags=\"@validate\""
+  },
+  "keywords": [
+    "Cypress",
+    "Cucumber",
+    "Gherkin",
+    "GitHub Actions"
+  ],
+  "author": "Not Yumei",
+  "license": "ISC",
+  "devDependencies": {
+    "@actions/core": "^1.10.0",
+    "@badeball/cypress-cucumber-preprocessor": "^15.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "cypress": "^12.1.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "filterSpecs": true,
+    "omitFiltered": true,
+    "stepDefinitions": [
+      "cypress/e2e/definitions/**/[filepath]/**/*.js",
+      "cypress/e2e/definitions/**/[filepath].js"
+    ]
+  }
+}
